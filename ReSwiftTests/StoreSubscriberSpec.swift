@@ -20,7 +20,6 @@ class StoreSubscriberTests: XCTestCase {
         store.subscribe(subscriber) {
             $0.testValue
         }
-
         store.dispatch(SetValueAction(3))
 
         XCTAssertEqual(subscriber.receivedValue, 3)
@@ -32,13 +31,7 @@ class StoreSubscriberTests: XCTestCase {
         let store = Store(reducer: reducer, state: TestComplexAppState())
         let subscriber = TestSelectiveSubscriber()
 
-        store.subscribe(subscriber) {
-            (
-                $0.testValue,
-                $0.otherState?.name
-            )
-        }
-
+        store.subscribe(subscriber) { ($0.testValue, $0.otherState?.name) }
         store.dispatch(SetValueAction(5))
         store.dispatch(SetOtherStateAction(
             otherState: OtherState(name: "TestName", age: 99)

@@ -44,7 +44,7 @@ class TypeHelperTests: XCTestCase {
         XCTAssertTrue(called)
     }
 
-    func textDoesntCallIfCastFails() {
+    func testDoesntCallIfCastFails() {
         // it doesn't call if source type can't be casted to function signature type
         var called = false
         let reducerFunction: (Action, AppState1?) -> AppState1 = { action, state in

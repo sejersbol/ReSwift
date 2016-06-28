@@ -45,7 +45,11 @@ public protocol StoreType {
 
      - parameter subscriber: Subscriber that will receive store updates
      */
+    #if swift(>=3)
+    func subscribe<S: StoreSubscriber where S.StoreSubscriberStateType == State>(_ subscriber: S)
+    #else
     func subscribe<S: StoreSubscriber where S.StoreSubscriberStateType == State>(subscriber: S)
+    #endif
 
     /**
      Unsubscribes the provided subscriber. The subscriber will no longer
@@ -53,7 +57,11 @@ public protocol StoreType {
 
      - parameter subscriber: Subscriber that will be unsubscribed
      */
+    #if swift(>=3)
+    func unsubscribe(_ subscriber: AnyStoreSubscriber)
+    #else
     func unsubscribe(subscriber: AnyStoreSubscriber)
+    #endif
 
     /**
      Dispatches an action. This is the simplest way to modify the stores state.
@@ -68,7 +76,11 @@ public protocol StoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
+    #if swift(>=3)
+    func dispatch(_ action: Action) -> Any
+    #else
     func dispatch(action: Action) -> Any
+    #endif
 
     /**
      Dispatches an action creator to the store. Action creators are functions that generate
@@ -103,13 +115,21 @@ public protocol StoreType {
      - returns: By default returns the dispatched action, but middlewares can change the
      return type, e.g. to return promises
      */
+    #if swift(>=3)
+    func dispatch(_ actionCreator: ActionCreator) -> Any
+    #else
     func dispatch(actionCreator: ActionCreator) -> Any
+    #endif
 
     /**
      Dispatches an async action creator to the store. An async action creator generates an
      action creator asynchronously.
      */
+    #if swift(>=3)
+    func dispatch(_ asyncActionCreator: AsyncActionCreator)
+    #else
     func dispatch(asyncActionCreator: AsyncActionCreator)
+    #endif
 
     /**
      Dispatches an async action creator to the store. An async action creator generates an
@@ -122,7 +142,11 @@ public protocol StoreType {
      - Note: If the ActionCreator does not dispatch an action, the callback block will never
      be called
      */
+    #if swift(>=3)
+    func dispatch(_ asyncActionCreator: AsyncActionCreator, callback: DispatchCallback?)
+    #else
     func dispatch(asyncActionCreator: AsyncActionCreator, callback: DispatchCallback?)
+    #endif
 
 
     /**

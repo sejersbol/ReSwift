@@ -24,10 +24,6 @@ public protocol Reducer: AnyReducer {
 
 extension Reducer {
     public func _handleAction(action: Action, state: StateType?) -> StateType {
-        #if swift(>=3)
-            return withSpecificTypes(action: action, state: state, function: handleAction)
-        #else
-            return withSpecificTypes(action, state: state, function: handleAction)
-        #endif
+        return withSpecificTypes(action, state: state, function: handleAction)
     }
 }

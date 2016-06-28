@@ -34,9 +34,9 @@ class StandardActionInitSerializationTests: XCTestCase {
 
     func testCanInitWithDictionary() {
         // it can initialize action with a dictionary
-        let actionDictionary: [String: AnyObject?] = [
+        let actionDictionary: [String: AnyObject] = [
             "type": "TestType",
-            "payload": nil,
+            "payload": reSwiftNull,
             "isTypedAction": true
         ]
 
